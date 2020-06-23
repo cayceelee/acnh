@@ -1,0 +1,13 @@
+### Django ###
+*.log
+*.pot
+*.pyc
+__pycache__
+db.sqlite3 
+media
+0*.py
+venv
+.vscode
+.env
+Pipfile
+Pipfile.lock

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Chelsea+Market&family=Work+Sans:wght@100;300&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <title>Document</title>
+</head>
+
+<body>
+    <main>
+        <div class="hero overlay">
+            <h1>Caycee's ACNH Island</h1>
+            <p>Ghibli Studio Inspired</p>
+
+            <!-- <div class="cloud">
+                <p>Peanuts</p>
+                
+            </div> -->
+        </div>
+        <div class="body">
+
+        {% for section in sections %}
+        <div  class="{{ section.section_type }} {% if section.section_type == "image-block" %}overlay{% endif %}" {% if section.section_type == 'image-block' %} style="background-image: url('{{ section.image_1.url }}')"{% endif %}>
+            <div class="text">
+                <h2>{{ section.title }}</h2>
+                <p>
+                    {{ section.body }}
+                </p>
+            </div>
+            {% if section.section_type == 'compare-block' %}
+            
+            <div class="images">
+                <img src="{{ section.image_1.url }}" alt="">
+                <img src="{{ section.image_2.url }}" alt="">
+            </div>
+            {% else %}
+            <img src="{{ section.image_1.url }}">
+            {% endif %}
+        </div>
+        {% endfor %}
+    </main>
+    <footer> 
+        <div class="footer">
+        <h1>Let's be friends!</h1>
+        <p>Thank you for taking the time to checkout my island! I really love both ghibli and animal crossing and I hope you recieved some inspiriation to build something that inspires you for your island and in your life!</p> 
+        <p>Here is my friend code: 12345</p>
+    </div>
+    <div class="copyright">
+        © Caycee Arreguin 2020
+    </div>
+
+        
+    </footer>
+</body>
+
+</html>
