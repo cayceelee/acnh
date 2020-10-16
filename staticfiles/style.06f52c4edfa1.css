@@ -1,0 +1,254 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 100;
+}
+
+.hero{
+    height: 100vh;
+    background-size: cover;
+    background-image: url("img/banner.cfddebdf52fb.jpg");
+    background-position: center;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.overlay {
+    position: relative;
+}
+
+.overlay::before {
+    content: '';
+    height: 100%;
+    width: 100%;
+    background-color: #00000050;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+}
+
+.overlay > * {
+    z-index: 1;
+    color: white;
+    
+}
+
+.hero h1 {
+    font-size: 100px;
+}
+
+.hero p {
+    font-size: 75px;
+}
+
+@media screen and (max-width: 850px) {
+    .hero h1 {font-size: 80px;}
+    .hero p {font-size: 60px;}
+}
+
+.cloud {
+    height: 30vw;
+    width: 90vw;
+    background: white;
+    border-radius: 40vw;
+    border: 5px solid pink;
+    position: relative;
+    margin-top: 20vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .cloud:before {
+    content: "";
+    position: absolute;
+    top: -10vw;
+    box-sizing: border-box;
+    height: 20vw;
+    width: 20vw;
+    left: 15vw;
+    border-radius: 50%;
+    border: 5px solid pink;
+    border-bottom-color: transparent;
+    border-right-color: transparent;
+    background: white;
+    transform: rotate(40deg);
+  }
+
+  .cloud:hover:before {
+      background: grey;
+  }
+
+  .cloud:after {
+    content: "";
+    position: absolute;
+    height: 40vw;
+    width: 40vw;
+    top: -20vw;
+    left: 32vw;
+    border-radius: 50%;
+    box-sizing: border-box;
+    border: 5px solid pink;
+    border-bottom-color: transparent;
+    background: white;
+    border-right-color: transparent;
+    transform: rotate(55deg);
+  }
+
+  .cloud > * {
+      z-index: 999;
+      font-size: 80px;
+
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: 'Chelsea Market', cursive;
+  }
+
+.image-block {
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+@media screen and (min-width: 900px) {
+    .image-block {
+        background-image: none !important;
+    }
+}
+
+.image-block:nth-child(2n+2) {
+    flex-direction: row-reverse;
+}
+
+.image-block .text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    width: 50%;
+}
+
+
+.image-block img {
+    width: 50%;
+}
+
+.image-block.overlay::before {
+    background-color: #00000000;
+}
+
+.image-block.overlay > * {
+    color: black;
+}
+
+  @media screen and (max-width:900px) {
+      .image-block {
+          flex-direction: column;
+          background-size: cover;
+          background-position: center;
+          color: white;
+          padding: 20px;
+      }
+      .image-block .text {
+          width: 100%;
+      }
+      .image-block img {
+          display: none;
+      }
+      .image-block.overlay::before {
+        background-color: #00000050;
+      }
+      .image-block.overlay > * {
+        color: white;
+    }
+  }
+
+
+.text h2 {
+    font-size: 60px;
+}
+
+.text p {
+    font-size: 25px;
+    font-weight: 300;
+}
+
+
+.compare-block img {
+    width: 50%;
+}
+
+.compare-block .images {
+    display: flex;
+    flex-flow: wrap;
+}
+
+.compare-block .text {
+    text-align: center;
+    padding: 20px;
+}
+
+.compare-block {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 100vh;
+}
+
+.compare-block p {
+    margin-top: 10px;
+}
+
+@media screen and (max-width:600px) {
+    .compare-block img {
+        width: 100%;
+    }
+    .compare-block {
+        justify-content: space-between;
+    }
+}
+
+.footer {
+    background-color: black;
+    color: white;
+    height: 300px;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer p {
+    text-align: center;
+    margin-top: 10px;
+    width: 80%;
+}
+
+.copyright {
+    displaY: flex;
+    font-weight: 300;
+    justify-content: center;
+    align-items: center;
+    height: 30px;
+}
