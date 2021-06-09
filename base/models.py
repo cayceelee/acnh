@@ -1,7 +1,6 @@
 from django.db import models
 from .choices import TYPE_CHOICES
 
-# Create your models here.
 class Section(models.Model):
     title = models.CharField(max_length=50)
     body = models.TextField()
