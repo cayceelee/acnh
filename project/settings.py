@@ -11,7 +11,7 @@ SECRET_KEY = config('SECRET_KEY')
 
 DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['caycee-acnh.herokuapp.com']
 
 
 # Application definition
@@ -122,6 +122,9 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 MEDIA_URL = '/media/'
 
+
+DEBUG_PROPAGATE_EXCEPTIONS = True
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -149,7 +152,7 @@ LOGGING = {
 }
 
 # Heroku Settings
-django_on_heroku.settings(locals(), staticfiles=True)
+django_on_heroku.settings(locals(), staticfiles=False)
 del DATABASES['default']['OPTIONS']['sslmode']
 
 
