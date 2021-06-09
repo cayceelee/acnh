@@ -1,14 +1,8 @@
 from django.db import models
+from .choices import TYPE_CHOICES
 
 # Create your models here.
 class Section(models.Model):
-    # Choices
-    TYPE_CHOICES = (
-        ('image-block', 'Image Block'),
-        ('compare-block', 'Compare Block'),
-    )
-
-    # Fields
     title = models.CharField(max_length=50)
     body = models.TextField()
     image_1 = models.ImageField(upload_to="images", null=True)

@@ -1,39 +1,27 @@
-import os
-import django_heroku
+import django_on_heroku
 import dj_database_url
-import dotenv
+from dotenv import load_dotenv, find_dotenv
+from pathlib import Path
+from decouple import config
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-ROOT_DIR = os.path.dirname(__file__)
+BASE_DIR = Path(__file__).parent
 
-# Local Environment Variable Initialization
+SECRET_KEY = config('SECRET_KEY')
 
-dotenv_file = os.path.join(BASE_DIR, ".env")
-if os.path.isfile(dotenv_file):
-    dotenv.load_dotenv(dotenv_file)
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ['SECRET_KEY']
-
-# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [
-    'yourhost.com',
-    '127.0.0.1',
-    'localhost',
-]
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
 
 INSTALLED_APPS = [
     'base',
+
     'storages',
+    'django_extensions',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -53,7 +41,9 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'project.urls'
+
 LOGIN_REDIRECT_URL = 'base:home'
+
 LOGOUT_REDIRECT_URL = 'base:home'
 
 TEMPLATES = [
@@ -77,6 +67,8 @@ WSGI_APPLICATION = 'project.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
+
+load_dotenv(find_dotenv())
 
 DATABASES = {}
 DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=False)
@@ -120,19 +112,33 @@ USE_TZ = True
 
 # AWS S3 Settings
 
-AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
-AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
-AWS_STORAGE_BUCKET_NAME = os.environ['S3_BUCKET_NAME']
+AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
+
+AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
+
+AWS_STORAGE_BUCKET_NAME = config('S3_BUCKET_NAME')
+
 AWS_DOMAIN_NAME = f'http://{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
 AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
 AWS_LOCATION = 'static'
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+if not DEBUG:
+    STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
 STATIC_URL = AWS_DOMAIN_NAME + '/static/'
-MEDIA_ROOT = os.path.join(BASE_DIR, "project/media/")
+
+MEDIA_ROOT = BASE_DIR / 'media'
+
 MEDIA_URL = '/media/'
 
 
 # Heroku Settings
-django_heroku.settings(locals())
+django_on_heroku.settings(locals(), staticfiles=False)
 del DATABASES['default']['OPTIONS']['sslmode']
+
+
+# Default primary key field type
+# https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
