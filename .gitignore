@@ -5,7 +5,6 @@
 __pycache__
 db.sqlite3 
 media
-0*.py
 venv
 .vscode
 .env
